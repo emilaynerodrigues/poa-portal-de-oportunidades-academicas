@@ -1,0 +1,73 @@
+/* import da fonte outfit */
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+/* cores do projeto */
+:root {
+  --rich-black: #00091d; /*font escura*/
+  --penn-blue: #000235; /*bg*/
+  --federal-blue: #1e1a56; /*destaque escuro*/
+  --medium-blue: #7475d2; /*sombra*/
+  --tiffany-blue: #a0d5d4; /*sombra e destaque*/
+  --white: #ffffff; /*bg e font*/
+  --white-flash: #f5f6f7; /*destaque no branco*/
+  --silver: #c1c1c1; /*bordas*/
+  --gray-font: #969292; /*font-gray*/
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Outfit", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  padding: 50px 75px 0px 75px;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.button {
+  height: 50px;
+  background-color: #7475d2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 16px;
+}
+
+.button-outline {
+  background-color: transparent;
+  border: solid 1.5px var(--tiffany-blue);
+  transition: background 0.3s ease-in-out;
+}
+
+.button-outline:hover {
+  background: var(--tiffany-blue);
+  color: var(--rich-black);
+  font-weight: 600; /* Cor do texto quando hover - Substitua pela cor desejada */
+}
+
+.shadow {
+  border-radius: 50%;
+  position: absolute;
+}
+
+.shadow:nth-child(1) {
+  background-color: var(--medium-blue);
+}
+
+.shadow:nth-child(2) {
+  background-color: var(--tiffany-blue);
+}

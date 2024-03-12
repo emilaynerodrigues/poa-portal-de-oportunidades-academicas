@@ -1,0 +1,161 @@
+body {
+  overflow: hidden;
+}
+
+.container {
+  height: 100vh;
+  padding: 0px;
+  display: flex;
+  background-color: var(--penn-blue);
+}
+
+.content {
+  height: 100%;
+  width: 100%;
+  padding: 50px 75px;
+}
+
+/* cadastrar */
+.content:nth-child(1) {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.content:nth-child(1) h2 {
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.graphic-element img {
+  height: 420px;
+  position: relative;
+  left: 20%;
+  bottom: 10%;
+  z-index: 20;
+}
+
+.content-form {
+  background-color: var(--white);
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* margin: 0 auto 64px; */
+}
+
+.cta-container,
+form,
+.prompt {
+  width: 640px;
+  margin: 0 auto;
+}
+
+.cta-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cta-container h2 {
+  font-size: 28px;
+}
+
+.cta-container p {
+  font-size: 14px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: 50px auto 10px;
+}
+
+.form-item {
+  position: relative; /* Permite posicionar as labels de forma relativa aos inputs */
+}
+
+form .name-item {
+  display: flex;
+  gap: 20px;
+}
+
+form .form-item {
+  position: relative;
+  flex: 1;
+}
+
+form .form-item input,
+form .form-item select {
+  height: 40px;
+  width: 100%;
+  border-radius: 8px;
+  border: solid 1px var(--silver);
+  padding: 8px 15px; /* Adiciona preenchimento interno para melhor aparência */
+}
+
+form .form-item select {
+  height: 45px;
+}
+
+form .form-item input:focus,
+form .form-item select:focus {
+  border: solid 1px var(--federal-blue);
+  outline: none;
+}
+
+form .form-item label {
+  display: block;
+  position: absolute; /* Permite posicionar as labels de forma absoluta em relação ao pai */
+  top: -8px;
+  left: 15px;
+  font-size: 12px;
+  color: var(--gray-font);
+  padding: 0 10px;
+  background-color: var(--white);
+}
+
+form button {
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--federal-blue);
+  color: var(--white);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+form button:hover {
+  background: var(--medium-blue);
+}
+
+.prompt p {
+  font-size: 14px;
+}
+
+.prompt a {
+  color: var(--federal-blue);
+  font-weight: 600;
+}
+
+.shadow {
+  height: 400px;
+  width: 400px;
+  filter: blur(180px);
+}
+
+.shadow:nth-child(1) {
+  top: -30%;
+  left: 0%;
+}
+
+.shadow:nth-child(2) {
+  bottom: -30%;
+  left: 20%;
+}
