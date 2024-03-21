@@ -4,120 +4,61 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portal de Oportunidades Acadêmicas</title>
-    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon" />
 
-    <!-- link css -->
+    <!-- links css -->
     <link rel="stylesheet" href="styles/main.css" />
-    <link rel="stylesheet" href="styles/inicio.css" />
+
+    <!-- link favicon -->
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
   </head>
-  <body>
-    <div class="container">
-      <!-- cabeçalho -->
-      <header>
-        <div class="logo">
-          <img
-            src="assets/logo.png"
-            alt="Logo Portal de Oportunidades Acadêmicas"
-          />
-        </div>
-        <!-- menu de navegação -->
-        <nav class="menu-nav">
-          <input type="checkbox" id="check" />
-          <label for="check" class="check-btn">
-            <span class="hamburger"></span>
-          </label>
-          <div
-            class="nav-list"
-            onclick="getElementById('check').checked=false;"
+  <body id="inicio">
+    <header class="header">
+      <a href="index.html">
+        <img
+          src="img/logo-escura.png"
+          alt="Logo do Portal de Oportunidades Acadêmicas"
+          class="logo"
+          style="height: 50px"
+        />
+      </a>
+
+      <nav class="menu-nav">
+        <a href="" class="menu-item">como funciona</a>
+        <a href="pages/cadastrar.html" class="menu-item">cadastra-se</a>
+        <a href="pages/login.html" class="btn small-btn white-hover">entrar</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <!-- conteudo textual + botões -->
+      <div class="content-hero">
+        <h1>
+          Encontre e publique projetos <span>freelancers</span>, tudo online
+        </h1>
+        <p>
+          Platafoma para divulgação e contratação de projetos freelancers para
+          estudantes do SENAC
+        </p>
+        <div class="btn-wrapper">
+          <a href="pages/login.html" class="btn normal-btn"
+            >encontrar projeto</a
           >
-            <a href="#" class="nav-item">como funciona</a>
-            <a href="pages/cadastrar.html" class="nav-item">cadastre-se</a>
-            <a
-              href="#"
-              class="nav-item button button-outline"
-              style="width: 160px"
-              >entrar</a
-            >
-          </div>
-        </nav>
-      </header>
-      <!-- corpo da pagina -->
-      <main>
-        <div class="content">
-          <!-- content com textos -->
-          <div class="hero">
-            <!-- texto destaque -->
-            <h1 class="highlight-text">
-              Encontre e <br />
-              publique projetos freelancers, <br />
-              tudo online
-            </h1>
-            <!-- texto comum -->
-            <p class="text">
-              Plataforma para divulgação e contratação de freelancers para
-              estudantes do SENAC
-            </p>
-            <!-- botões -->
-            <div class="buttons">
-              <a href="" class="button" style="height: 55px; width: 270px"
-                >encontrar projeto</a
-              >
-              <a
-                href=""
-                class="button button-outline"
-                style="height: 55px; width: 270px"
-                >publicar projeto</a
-              >
-            </div>
-          </div>
+          <a href="pages/login.html" class="btn normal-btn outline-btn"
+            >publicar projeto</a
+          >
         </div>
+      </div>
 
-        <!-- imagens absolutas -->
-        <div class="hero-img">
-          <img
-            src="assets/inicio/data.png"
-            alt="Animação gráfica de dados"
-            srcset=""
-          />
-          <img
-            src="assets/inicio/girl.png"
-            alt="Animação gráfica de uma garota"
-            srcset=""
-          />
-          <img
-            src="assets/inicio/boy.png"
-            alt="Animação gráfica de um garoto"
-            srcset=""
-          />
-          <img
-            src="assets/inicio/computer.png"
-            alt="Animação gráfica de um computador"
-            srcset=""
-          />
-          <img
-            src="assets/inicio/bag.png"
-            alt="Animação gráfica de uma sacola"
-            srcset=""
-          />
-          <img
-            src="assets/inicio/little-bag.png"
-            alt="Animação gráfica de sacolas"
-            srcset=""
-          />
-          <img
-            src="assets/inicio/ball.png"
-            alt="Animação gráfica de uma esfera"
-            srcset=""
-          />
-        </div>
-
-        <!-- sombras absolutas -->
-        <div class="shadow-wrapper">
-          <div class="shadow"></div>
-          <div class="shadow"></div>
-        </div>
-      </main>
-    </div>
-    <script src="script/main.js"></script>
+      <!-- imagem -->
+      <img
+        src="img/inicio-img.svg"
+        alt="Representação gráfica de dois jovens (uma moça e um rapaz) trocando informações"
+        class="img-inicio"
+        style="height: 400px"
+      />
+    </main>
+    <!-- vetor de fundo -->
+    <img src="img/elipse.svg" alt="elipse" class="absolute" />
+    <script src="js/main.js"></script>
   </body>
 </html>

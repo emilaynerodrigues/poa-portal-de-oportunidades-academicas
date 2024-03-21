@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Faça seu cadastro - POA</title>
+    <title>Faça Login - POA</title>
 
     <!-- links css -->
     <link rel="stylesheet" href="../styles/main.css" />
@@ -17,7 +17,7 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
   </head>
-  <body id="cadastrar">
+  <body id="login">
     <header class="header">
       <a href="../index.html">
         <img
@@ -30,49 +30,31 @@
     </header>
 
     <main class="container">
+      <!-- imagem -->
+      <img
+        src="../img/login-img.svg"
+        alt="Representação gráfica de dois jovens (uma moça e um rapaz) trocando informações"
+        class="img-inicio"
+        style="height: 400px"
+      />
       <!-- conteudo principal -->
       <div class="content-wrapper">
         <!-- informação call to action -->
         <div class="cta-info">
-          <h2>Criar Conta</h2>
+          <h2>Entrar na sua conta</h2>
           <p>
-            Crie uma conta para encontrar e publicar projetos no Portal de
-            Oportunidades
+            Entre em sua conta para encontrar e publicar projetos no Portal de
+            Oportunidades Acadêmicas
           </p>
         </div>
 
+        <!-- formulário de login -->
         <form action="">
-          <div class="flex-row">
-            <!-- nome -->
-            <div class="form-item">
-              <input type="text" name="nome" id="nome-input" required />
-              <label for="nome-input">Nome</label>
-            </div>
-
-            <!-- sobrenome -->
-            <div class="form-item">
-              <input
-                type="text"
-                name="sobrenome"
-                id="sobrenome-input"
-                required
-              />
-              <label for="sobrenome-input">Sobrenome</label>
-            </div>
-          </div>
-
           <!-- cpf -->
           <div class="form-item">
             <input type="text" name="cpf" id="cpf-input" required />
-            <label for="cpf-input">CPF</label>
+            <label for="cpf-input">E-mail</label>
           </div>
-
-          <!-- email -->
-          <div class="form-item">
-            <input type="text" name="email" id="email-input" required />
-            <label for="email-input">E-mail</label>
-          </div>
-
           <!-- senha -->
           <div class="form-item">
             <input type="password" name="senha" id="senha-input" required />
@@ -84,30 +66,21 @@
             >
           </div>
 
-          <button type="submit">Cadastrar</button>
+          <button type="submit">Entrar</button>
         </form>
 
         <!-- call to action prompt -->
         <div class="cta-prompt">
           <p>
-            Já possui uma conta conta?
-            <span><a href="../pages/login.html">Faça login</a></span>
+            Não possui conta?
+            <span><a href="../pages/cadastrar.html">Crie uma conta</a></span>
           </p>
         </div>
       </div>
-
-      <!-- imagem -->
-      <img
-        src="../img/cadastrar-img.svg"
-        alt="Representação gráfica de jovem com um telefone celular"
-        class="img-inicio"
-        style="height: 400px"
-      />
     </main>
 
     <!-- vetor de fundo -->
     <img src="../img/elipse.svg" alt="elipse" class="absolute" />
-
     <script src="../js/senha.js"></script>
   </body>
 </html>
