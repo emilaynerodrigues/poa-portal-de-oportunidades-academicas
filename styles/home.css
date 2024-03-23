@@ -8,6 +8,7 @@ aside {
   height: 100vh;
   position: fixed;
   color: var(--white);
+  z-index: 10;
   transition: width 0.3s; /* Adiciona uma transição suave para a largura */
 }
 
@@ -94,18 +95,12 @@ aside.menu-open #menuOptions .menu-item-label {
   font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 48;
 }
 
-
 .header {
   height: 84.4px; /*mesmo tamanho do toogle do aside*/
   display: flex;
   align-items: center;
   padding: 0 30px;
   box-shadow: 0px 2px 2px 0px #1b131325;
-}
-
-#menu-inicial {
-  padding: 50px;
-  background-color: yellowgreen;
 }
 
 #contratacoes {
@@ -139,8 +134,198 @@ aside.menu-open #menuOptions .menu-item-label {
 .content-wrapper {
   flex: 1;
   overflow-y: auto; /* Adiciona uma barra de rolagem quando o conteúdo for maior que a tela */
+  display: flex;
+  flex-direction: column;
 }
 
-section {
+main section {
   flex: 1;
+  padding: 30px;
+  position: relative;
+}
+
+main section h4 {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* menu inicial - section */
+.add-btn {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 30px;
+  right: 50px;
+  background-color: var(--federal-blue);
+}
+
+.add-btn span {
+  color: var(--white);
+}
+
+.projetos-wrapper {
+  margin-top: 20px;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 35px;
+
+  /* background-color: #888; */
+}
+
+.projeto {
+  width: calc(50% - 18px);
+  border-radius: 5px;
+  border: solid 1px var(--federal-blue);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.projeto .head-projeto {
+  display: flex;
+  gap: 15px;
+}
+
+.projeto .head-projeto .user-icon {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: var(--medium-blue);
+}
+
+.projeto .head-projeto h3 {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.projeto p,
+.projeto span {
+  font-size: 14px;
+}
+
+.tags-projeto {
+  display: flex;
+  gap: 15px;
+}
+
+.tag {
+  padding: 3px 10px;
+  border-radius: 3px;
+}
+
+.descricao-projeto {
+  overflow: hidden;
+  max-height: 80px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* Limita o número de linhas */
+}
+
+.ver-mais {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--federal-blue);
+  cursor: pointer;
+}
+
+/* Estilos para o modal */
+.modal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  /* Empilha sobre outros elementos */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--white);
+  padding: 30px;
+  border-radius: 5px;
+  max-width: 650px;
+  /* height: 80%; */
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  color: var(--rich-black);
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--savoy-blue);
+  cursor: pointer;
+  font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 48;
+}
+
+.anunciante {
+  font-weight: 600;
+}
+
+.tag.categoria {
+  background-color: #e3f5f0;
+  color: #70a08f;
+}
+
+.tag.formato {
+  background-color: #ddddf3;
+  color: #5859ad;
+}
+
+.tag.valor {
+  background-color: #ffecd3;
+  color: #e2852e;
+}
+
+.modal .descricao-texto {
+  line-height: 1.2em;
+}
+
+.modal .head-projeto {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.modal .user-icon {
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+  background-color: var(--medium-blue);
+}
+
+.modal h3 {
+  font-size: 24px;
+}
+
+.modal p,
+.modal span {
+  font-size: 16px;
+}
+
+.mostrar-tudo .descricao-texto {
+  max-height: none;
+}
+
+.modal-content .btn-wrapper {
+  justify-content: center;
 }
