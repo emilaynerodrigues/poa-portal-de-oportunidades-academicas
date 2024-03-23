@@ -16,5 +16,5 @@ function conectar()
     return $conn;
 }
 
-// conectar(); //chamada da função
+conectar(); //chamada da função
 ?>

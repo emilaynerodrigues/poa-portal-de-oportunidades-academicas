@@ -7,6 +7,7 @@
 
     <!-- links css -->
     <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/initial.css" />
 
     <!-- link favicon -->
     <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon" />
@@ -19,7 +20,7 @@
   </head>
   <body id="login">
     <header class="header">
-      <a href="../index.html">
+      <a href="../index.php">
         <img
           src="../img/logo-escura.png"
           alt="Logo do Portal de Oportunidades Acadêmicas"
@@ -73,7 +74,7 @@
         <div class="cta-prompt">
           <p>
             Não possui conta?
-            <span><a href="../pages/cadastrar.html">Crie uma conta</a></span>
+            <span><a href="../pages/cadastrar.php">Crie uma conta</a></span>
           </p>
         </div>
       </div>

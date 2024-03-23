@@ -7,11 +7,11 @@
   <title>Home</title>
 
   <!-- links css -->
-  <link rel="stylesheet" href="styles/main.css" />
-  <link rel="stylesheet" href="styles/home.css" />
+  <link rel="stylesheet" href="../../styles/main.css" />
+  <link rel="stylesheet" href="../../styles/home.css" />
 
   <!-- link favicon -->
-  <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="../../img/favicon.png" type="image/x-icon" />
 
   <!-- link font symbols -->
   <link rel="stylesheet"
@@ -60,7 +60,7 @@
   <div class="container">
     <header class="header">
       <div class="logo">
-        <img src="img/logo-escura.png" alt="" srcset="" style="height: 50px" />
+        <img src="../../img/logo-escura.png" alt="" srcset="" style="height: 50px" />
       </div>
     </header>
 
@@ -71,10 +71,10 @@
 
         <!-- area dos projetos -->
         <div class="projetos-wrapper">
-          <?php include 'components/projeto.php'; ?>
+          <?php include '../../components/projeto.php'; ?>
         </div>
 
-        <a href="#" class="add-btn">
+        <a href="adicionar-projeto.php" class="add-btn">
           <span class="material-symbols-outlined"> add </span>
         </a>
       </section class="content">
@@ -87,7 +87,7 @@
     </main>
   </div>
 
-  <script src="js/main.js"></script>
+  <script src="../../js/main.js"></script>
 </body>
 
 </html>

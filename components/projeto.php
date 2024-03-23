@@ -1,6 +1,7 @@
 <?php
 // o arquivo de conexão com o banco de dados
-include 'php/conexao.php';
+include '../../php/conexao.php';
+
 
 try {
     // estabelecendo a conexão com o banco de dados
@@ -150,7 +151,7 @@ try {
         autorProjeto.textContent = autor;
         categoriaProjeto.textContent = categoria;
         formatoProjeto.textContent = formato;
-        valorProjeto.textContent = valor;
+        valorProjeto.textContent = "R$ " + valor;
         descricaoProjeto.textContent = descricao;
 
         // abrindo o modal

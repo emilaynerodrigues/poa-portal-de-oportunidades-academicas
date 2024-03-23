@@ -7,9 +7,10 @@
 
     <!-- links css -->
     <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/initial.css">
 
     <!-- link favicon -->
-    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon" />
   </head>
   <body id="inicio">
     <header class="header">
@@ -24,8 +25,8 @@
 
       <nav class="menu-nav">
         <a href="" class="menu-item">como funciona</a>
-        <a href="pages/cadastrar.html" class="menu-item">cadastra-se</a>
-        <a href="pages/login.html" class="btn small-btn white-hover">entrar</a>
+        <a href="pages/cadastrar.php" class="menu-item">cadastra-se</a>
+        <a href="pages/login.php" class="btn small-btn white-hover">entrar</a>
       </nav>
     </header>
 
@@ -40,10 +41,10 @@
           estudantes do SENAC
         </p>
         <div class="btn-wrapper">
-          <a href="pages/login.html" class="btn normal-btn"
+          <a href="pages/login.php" class="btn normal-btn"
             >encontrar projeto</a
           >
-          <a href="pages/login.html" class="btn normal-btn outline-btn"
+          <a href="pages/login.php" class="btn normal-btn outline-btn"
             >publicar projeto</a
           >
         </div>
