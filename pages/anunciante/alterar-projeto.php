@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Adicione seu projeto - POA</title>
+    <title>Altere os dados do seu projeto - POA</title>
 
     <!-- links css -->
     <link rel="stylesheet" href="../../styles/main.css" />
@@ -43,8 +43,8 @@
             <section class="content">
                 <div class="form-container">
                     <div class="form-head">
-                        <h4>Novo Projeto</h4>
-                        <p>Adicione seu projeto e permita que os alunos se candidatem para contribuir</p>
+                        <h4>Alterar dados do projeto</h4>
+                        <p>Altere os dados de seu projeto e permita que os alunos se candidatem para contribuir</p>
                     </div>
 
                     <!-- formulario -->
@@ -155,7 +155,7 @@
 
                         <div class="btn-wrapper">
                             <button type="submit" class="btn small-btn cancel-btn" id="cancelBtn">Cancelar</button>
-                            <button type="submit" class="btn small-btn">Publicar Projeto</button>
+                            <button type="submit" class="btn small-btn">Alterar Projeto</button>
                         </div>
                     </form>
                 </div>

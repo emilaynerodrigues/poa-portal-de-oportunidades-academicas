@@ -19,7 +19,7 @@ try {
         // analizando cada projeto dentro da tabela
         foreach ($projetos as $projeto) {
             // exibindo os dados do projeto dentro da estrutura HTML do projeto
-            ?>
+?>
 
             <body>
                 <div class="projeto">
@@ -64,13 +64,10 @@ try {
                     </div>
 
                     <!-- Passando a descrição como parâmetro para a função abrirModal() -->
-                    <a href="#" class="ver-mais" data-titulo="<?php echo $projeto['titulo']; ?>"
-                        data-autor="<?php echo $projeto['autor']; ?>" data-categoria="<?php echo $projeto['categoria']; ?>"
-                        data-formato="<?php echo $projeto['formato']; ?>" data-valor="<?php echo $projeto['valor']; ?>"
-                        data-descricao="<?php echo $projeto['descricao']; ?>" onclick="abrirModal(this)">Ver mais</a>
+                    <a href="#" class="ver-mais" data-titulo="<?php echo $projeto['titulo']; ?>" data-autor="<?php echo $projeto['autor']; ?>" data-categoria="<?php echo $projeto['categoria']; ?>" data-formato="<?php echo $projeto['formato']; ?>" data-valor="<?php echo $projeto['valor']; ?>" data-descricao="<?php echo $projeto['descricao']; ?>" onclick="abrirModal(this)">Ver mais</a>
                 </div>
             </body>
-            <?php
+<?php
         }
     } else {
         // caso não exista projetos, exiba uma mensagem indicando isso
@@ -84,10 +81,10 @@ try {
 
 <!-- modal para exibir detalhes do projeto -->
 
-<div id="myModal" class="modal">
+<div id="projectModal" class="modal">
     <div class="modal-content">
         <!-- icon para fechar o modal -->
-        <span class="close material-symbols-outlined" onclick="fecharModal()"> close </span>
+        <span class="close-icon material-symbols-outlined" onclick="fecharModal()"> close </span>
 
         <div class="head-projeto">
             <div class="user-icon"></div>
@@ -119,9 +116,9 @@ try {
         <p id="descricao-projeto" class="descricao-texto"> </p>
 
         <div class="btn-wrapper">
-            <div class="btn normal-btn outline-btn">Candidatos inscritos</div>
-            <div class="btn small-btn delete-btn">Excluir projeto</div>
-            <div class="btn small-btn">Alterar dados</div>
+            <a class="btn normal-btn outline-btn">Candidatos inscritos</a>
+            <a class="btn small-btn delete-btn">Excluir projeto</a>
+            <a href="../../pages/anunciante/alterar-projeto.php" class="btn small-btn">Alterar dados</a>
         </div>
     </div>
 </div>
@@ -129,7 +126,7 @@ try {
 <script>
     // função para abrir o modal e exibir a descrição do projeto
     function abrirModal(link) {
-        var modal = document.getElementById("myModal");
+        var modal = document.getElementById("projectModal");
         var tituloProjeto = document.getElementById("titulo-projeto");
         var autorProjeto = document.getElementById("autor-projeto");
         var categoriaProjeto = document.getElementById("categoria-projeto");
@@ -160,7 +157,7 @@ try {
 
     // função para fechar o modal
     function fecharModal() {
-        var modal = document.getElementById("myModal");
+        var modal = document.getElementById("projectModal");
         modal.style.display = "none";
     }
 </script>

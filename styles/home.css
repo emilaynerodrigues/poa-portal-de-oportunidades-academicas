@@ -91,7 +91,7 @@ aside.menu-open #menuOptions .menu-item-label {
   left: 22%;
 }
 
-.material-symbols-outlined {
+aside .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 48;
 }
 
@@ -174,8 +174,6 @@ main section h4 {
   display: flex;
   flex-wrap: wrap;
   gap: 35px;
-
-  /* background-color: #888; */
 }
 
 .projeto {
@@ -235,47 +233,6 @@ main section h4 {
   cursor: pointer;
 }
 
-/* Estilos para o modal */
-.modal {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  z-index: 1;
-  /* Empilha sobre outros elementos */
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  background-color: var(--white);
-  padding: 30px;
-  border-radius: 5px;
-  max-width: 650px;
-  /* height: 80%; */
-}
-
-.close {
-  position: absolute;
-  right: 20px;
-  color: var(--rich-black);
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
-}
-
-.close:hover,
-.close:focus {
-  color: var(--savoy-blue);
-  cursor: pointer;
-  font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 48;
-}
 
 .anunciante {
   font-weight: 600;
@@ -294,38 +251,4 @@ main section h4 {
 .tag.valor {
   background-color: #ffecd3;
   color: #e2852e;
-}
-
-.modal .descricao-texto {
-  line-height: 1.2em;
-}
-
-.modal .head-projeto {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.modal .user-icon {
-  height: 55px;
-  width: 55px;
-  border-radius: 50%;
-  background-color: var(--medium-blue);
-}
-
-.modal h3 {
-  font-size: 24px;
-}
-
-.modal p,
-.modal span {
-  font-size: 16px;
-}
-
-.mostrar-tudo .descricao-texto {
-  max-height: none;
-}
-
-.modal-content .btn-wrapper {
-  justify-content: center;
 }

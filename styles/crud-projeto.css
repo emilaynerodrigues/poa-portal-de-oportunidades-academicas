@@ -1,0 +1,139 @@
+body {
+  color: var(--federal-blue);
+}
+
+aside {
+  width: 74px;
+}
+
+aside .toggle-container {
+  height: 84.4px;
+}
+
+form {
+  width: 100%;
+}
+
+textarea {
+  resize: none;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: solid 1px var(--federal-blue);
+  border-radius: 5px;
+  padding: 30px;
+}
+
+.form-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-head p {
+  font-size: 14px;
+}
+
+.form-item {
+  position: relative;
+}
+
+.form-item label {
+  position: absolute;
+  top: -12px;
+  left: 15px;
+  padding: 5px 10px;
+  font-size: 12px;
+  background-color: var(--white);
+  color: var(--federal-blue);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+form input,
+form textarea,
+form select {
+  width: 100%;
+  padding: 0px 20px;
+  border-radius: 5px;
+  border: solid 1px var(--federal-blue);
+  font-size: 14px;
+  color: var(--federal-blue);
+}
+
+form input,
+form select {
+  height: 40px;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  outline: none;
+}
+
+form .row {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  width: 100%;
+}
+
+/* primeira row */
+.row:nth-child(1) .form-item:nth-child(1) {
+  width: 55%;
+}
+
+.row:nth-child(1) .form-item:nth-child(2),
+.form-item:nth-child(3) {
+  width: 25%;
+}
+
+/* segunda row */
+.row:nth-child(2) .form-item:nth-child(1) {
+  width: 20%;
+}
+
+.row:nth-child(2) .form-item:nth-child(2),
+.row:nth-child(2) .form-item:nth-child(3) {
+  width: 25%;
+}
+
+.row:nth-child(2) .form-item:nth-child(4) {
+  width: 20%;
+}
+
+.row:nth-child(2) .form-item:nth-child(5) {
+  width: 10%;
+}
+
+#descricao {
+  width: 100%;
+  position: relative;
+}
+
+#descricao textarea {
+  padding: 20px;
+}
+
+#contador {
+  font-size: 12px;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+}
+
+.btn-wrapper {
+  justify-content: end;
+}

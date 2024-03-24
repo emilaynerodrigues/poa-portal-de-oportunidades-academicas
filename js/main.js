@@ -55,3 +55,4 @@ menuToggle.addEventListener("change", function () {
   aside.style.width = this.checked ? "300px" : "74px"; // Ajusta a largura conforme o estado do menu
   aside.classList.toggle("menu-open", this.checked); // Adiciona a classe 'menu-open' se o menu estiver aberto
 });
+
