@@ -233,7 +233,6 @@ main section h4 {
   cursor: pointer;
 }
 
-
 .anunciante {
   font-weight: 600;
 }
@@ -251,4 +250,26 @@ main section h4 {
 .tag.valor {
   background-color: #ffecd3;
   color: #e2852e;
+}
+
+#menu-inicial {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+#menu-inicial .pagination {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  display: flex;
+}
+
+#menu-inicial .pagination a {
+  display: flex;
+}
+
+#menu-inicial .pagination .icon{
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 40;
+
 }

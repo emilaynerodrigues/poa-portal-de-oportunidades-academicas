@@ -1,3 +1,80 @@
+<?php
+// iniciando sessão
+session_start();
+ob_start(); //limpando buffer
+
+//fazendo conexão com o banco de dados
+include("../../php/conexao.php");
+$conn = conectar();
+
+//recebendo o id do projeto através da URL, utilizando o método GET
+$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
+
+//caso a variável "id" não esteja vazia, pesquisar pelo projeto no banco de dados.
+$query_projeto = "SELECT id, titulo, categoria, formato, valor, dataInicio, dataFinal, cidade, uf, descricao, dataPostagem FROM projeto WHERE id=:id LIMIT 1";
+
+//preparando a query
+$result_projeto = $conn->prepare($query_projeto);
+$result_projeto->bindParam(":id", $id, PDO::PARAM_INT);
+
+//executando a consulta
+$result_projeto->execute();
+
+//verificar se encontrou o projeto no banco
+if ($result_projeto->rowCount() != 1) {
+    // projeto não encontrado, redirecionar para página inicial do anunciante
+    header("Location: ../../pages/anunciante/home.php");
+    exit; // encerrando o script para evitar que o restante seja executado
+}
+
+//armazenando os dados em um Array Associativo
+$row_projeto = $result_projeto->fetch(PDO::FETCH_ASSOC);
+
+// verificando se o formulário foi submetido
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['EditProjeto'])) {
+    // recebendo os dados do formulário
+    $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+    // implementando a atualização do projeto
+    $query_update = "UPDATE projeto SET titulo=:titulo, categoria=:categoria, formato=:formato, valor=:valor, dataInicio=:dataInicio, dataFinal=:dataFinal, cidade=:cidade, uf=:uf, descricao=:descricao, dataPostagem=:dataPostagem WHERE id=:id";
+
+    //preparando a query 
+    $edite_projeto = $conn->prepare($query_update);
+
+    // passando os dados das variáveis para os pseudo-nomes
+    $edite_projeto->bindParam(":titulo", $dados['titulo'], PDO::PARAM_STR);
+    $edite_projeto->bindParam(":categoria", $dados['categoria'], PDO::PARAM_STR);
+    $edite_projeto->bindParam(":formato", $dados['formato'], PDO::PARAM_STR);
+    $edite_projeto->bindParam(":valor", $dados['valor'], PDO::PARAM_STR);
+    $edite_projeto->bindParam(":dataInicio", $dados['dataInicio'], PDO::PARAM_STR);
+    $edite_projeto->bindParam(":dataFinal", $dados['dataFinal'], PDO::PARAM_STR);
+    $edite_projeto->bindParam(":cidade", $dados['cidade'], PDO::PARAM_STR);
+    $edite_projeto->bindParam(":uf", $dados['uf'], PDO::PARAM_STR);
+    $edite_projeto->bindParam(":descricao", $dados['descricao'], PDO::PARAM_STR);
+    $edite_projeto->bindParam(":dataPostagem", $dados['dataPostagem'], PDO::PARAM_STR);
+    $edite_projeto->bindParam(":id", $id, PDO::PARAM_INT);
+
+    // verificando se a execução da query foi realizada com sucesso
+    if ($edite_projeto->execute()) {
+        // Atualização bem-sucedida, redirecionar para a página de alteração do projeto
+        $_SESSION["projeto-atualizado"] = true;
+        // redirecionar para a página de alteração do projeto após o tratamento do formulário
+        //para então mostrar mensagem do modal
+        header("Location: alterar-projeto.php?id=$id");
+        exit; // encerrando o script para evitar que o restante seja executado
+    } else {
+        // atualização falhou, exibir mensagem de erro
+        $error_message = "Erro ao atualizar o projeto.";
+    }
+}
+
+// verificando se a variável de sessão está definida para exibir o modal de confirmação
+$show_modal = isset($_SESSION['projeto-atualizado']);
+// destruindo sessão após mostrar a mensagem
+unset($_SESSION['projeto-atualizado']);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +96,24 @@
 </head>
 
 <body>
+
+    <!-- mosrando mensagem de projeto publicado-->
+    <?php if ($show_modal) : ?>
+        <!-- Modal de confirmação - Projeto atualizado! -->
+        <div class="modal modal-session">
+            <div class="modal-content">
+                <a href="home.php"><span class="modal-close close-icon material-symbols-outlined"> close </span></a>
+                <span class="icon material-symbols-outlined"> check_circle </span>
+                <h3>Dados alterados com sucesso!</h3>
+                <p>As alterações foram salvas com sucesso e seu projeto está atualizado</p>
+                <div class="btn-wrapper">
+                    <a href="home.php" class="btn small-btn modal-close">Entendi</a>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+    <!-- fechando mensagem de projeto publicado-->
+
     <!-- menu lateral -->
     <aside class="sidebar">
         <!-- Ícone de hambúrguer -->
@@ -48,12 +143,12 @@
                     </div>
 
                     <!-- formulario -->
-                    <form action="">
+                    <form action="" method="post">
                         <!-- primeira linha -->
                         <div class="row">
                             <!-- titulo do projeto -->
                             <div class="form-item">
-                                <input type="text" name="titulo" id="titulo-input" required />
+                                <input type="text" name="titulo" id="titulo-input" required value="<?php echo isset($dados['titulo']) ? $dados['titulo'] : $row_projeto['titulo']; ?>" />
                                 <label for="titulo-input">Titulo do Projeto*</label>
                             </div>
 
@@ -61,28 +156,44 @@
                             <div class="form-item select">
                                 <select name="categoria" id="categoria-select" required>
                                     <option value="" disabled selected hidden>Selecione uma categoria</option>
-                                    <option value="Arte e Design">Arte e Design</option>
-                                    <option value="Beleza e Estética">Beleza e Estética</option>
-                                    <option value="Gestão e Finanças">Gestão e Finanças</option>
-                                    <option value="Suporte e Manutenção">Manutenção de Computadores</option>
-                                    <option value="Marketing e Vendas">Marketing e Vendas</option>
-                                    <option value="Suporte e Administrativo">Suporte e Administrativo</option>
-                                    <option value="TI e Programação">TI e Programação</option>
-                                    <option value="Tradução e Contéudos">Tradução e Contéudos</option>
+
+                                    <?php
+                                    $categorias = array("Arte e Design", "Beleza e Estética", "Gestão e Finanças", "Manutenção de Computadores", "Marketing e Vendas", "Suporte e Administrativo", "TI e Programação", "Tradução e Contéudos");
+                                    foreach ($categorias as $categoria) {
+                                        echo "<option value='$categoria'";
+                                        if (isset($dados['categoria']) && $dados['categoria'] == $categoria) {
+                                            echo " selected";
+                                        } elseif (isset($row_projeto['categoria']) && $row_projeto['categoria'] == $categoria) {
+                                            echo " selected";
+                                        }
+                                        echo ">$categoria</option>";
+                                    }
+                                    ?>
                                 </select>
 
-                                <label for="categoria-input">Categoria*</label>
+                                <label for="categoria-select">Categoria*</label>
                             </div>
 
                             <!-- formato de trabalho -->
                             <div class="form-item select">
                                 <select name="formato" id="formato-select" required>
                                     <option value="" disabled selected hidden>Selecione um formato de trabalho</option>
-                                    <option value="remoto">Remoto</option>
-                                    <option value="presencial">Presencial</option>
+
+                                    <?php
+                                    $formatos = array("Remoto", "Presencial");
+                                    foreach ($formatos as $formato) {
+                                        echo "<option value='$formato'";
+                                        if (isset($dados['formato']) && $dados['formato'] == $formato) {
+                                            echo " selected";
+                                        } elseif (isset($row_projeto['formato']) && $row_projeto['formato'] == $formato) {
+                                            echo " selected";
+                                        }
+                                        echo ">$formato</option>";
+                                    }
+                                    ?>
                                 </select>
 
-                                <label for="formato-input">Formato de Trabalho*</label>
+                                <label for="formato-select">Formato de Trabalho*</label>
                             </div>
                         </div>
 
@@ -90,82 +201,72 @@
                         <div class="row">
                             <!-- valor do projeto -->
                             <div class="form-item">
-                                <input type="text" name="valor" id="valor-input" required />
+                                <input type="text" name="valor" id="valor-input" required value="<?php echo isset($dados['valor']) ? $dados['valor'] : $row_projeto['valor']; ?>" />
                                 <label for="valor-input">Valor*</label>
                             </div>
+
                             <!-- data-inicio -->
                             <div class="form-item">
-                                <input type="date" name="data-inicio" id="dataInicio-input" />
+                                <input type="date" name="dataInicio" id="dataInicio-input" value="<?php echo isset($dados['dataInicio']) ? $dados['dataInicio'] : $row_projeto['dataInicio']; ?>" />
                                 <label for="dataInicio-input">Data de início</label>
                             </div>
+
                             <!-- data-final -->
                             <div class="form-item">
-                                <input type="date" name="data-final" id="dataFinal-input" />
+                                <input type="date" name="dataFinal" id="dataFinal-input" value="<?php echo isset($dados['dataFinal']) ? $dados['dataFinal'] : $row_projeto['dataFinal']; ?>" />
                                 <label for="dataFinal-input">Data de finalização</label>
                             </div>
+
                             <!-- cidade -->
                             <div class="form-item">
-                                <input type="text" name="cidade" id="cidade-input" />
+                                <input type="text" name="cidade" id="cidade-input" value="<?php echo isset($dados['cidade']) ? $dados['cidade'] : $row_projeto['cidade']; ?>" />
                                 <label for="cidade-input">Cidade</label>
                             </div>
+
                             <!-- uf -->
                             <div class="form-item select">
                                 <select name="uf" id="uf-select" required>
                                     <option value="" disabled selected hidden>Selecione</option>
-                                    <option value="AC">AC</option>
-                                    <option value="AL">AL</option>
-                                    <option value="AP">AP</option>
-                                    <option value="AM">AM</option>
-                                    <option value="BA">BA</option>
-                                    <option value="CE">CE</option>
-                                    <option value="DF">DF</option>
-                                    <option value="ES">ES</option>
-                                    <option value="GO">GO</option>
-                                    <option value="MA">MA</option>
-                                    <option value="MT">MT</option>
-                                    <option value="MS">MS</option>
-                                    <option value="MG">MG</option>
-                                    <option value="PA">PA</option>
-                                    <option value="PB">PB</option>
-                                    <option value="PR">PR</option>
-                                    <option value="PE">PE</option>
-                                    <option value="PI">PI</option>
-                                    <option value="RJ">RJ</option>
-                                    <option value="RN">RN</option>
-                                    <option value="RS">RS</option>
-                                    <option value="RO">RO</option>
-                                    <option value="RR">RR</option>
-                                    <option value="SC">SC</option>
-                                    <option value="SP">SP</option>
-                                    <option value="SE">SE</option>
-                                    <option value="TO">TO</option>
+                                    <?php
+                                    $ufs = array("AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO");
+                                    foreach ($ufs as $uf) {
+                                        echo "<option value='$uf'";
+                                        if (isset($dados['uf']) && $dados['uf'] == $uf) {
+                                            echo " selected";
+                                        } elseif (isset($row_projeto['uf']) && $row_projeto['uf'] == $uf) {
+                                            echo " selected";
+                                        }
+                                        echo ">$uf</option>";
+                                    }
+                                    ?>
                                 </select>
 
-                                <label for="uf-input">UF</label>
+                                <label for="uf-select">UF</label>
                             </div>
 
                         </div>
 
                         <!-- descricao do projeto -->
                         <div id="descricao" class="form-item">
-                            <textarea id="texto" name="descricao" rows="6" cols="50" maxlength="1000" required></textarea>
+                            <textarea id="descricao-input" name="descricao" rows="6" cols="50" maxlength="1000" required><?php echo isset($dados['descricao']) ? $dados['descricao'] : (isset($row_projeto['descricao']) ? $row_projeto['descricao'] : ''); ?></textarea>
                             <label for="descricao-input">Descrição*</label>
                             <span id="contador">* 1000 caracteres restantes</span>
                         </div>
 
                         <div class="btn-wrapper">
-                            <button type="submit" class="btn small-btn cancel-btn" id="cancelBtn">Cancelar</button>
-                            <button type="submit" class="btn small-btn">Alterar Projeto</button>
+                            <button type="submit" class="btn small-btn" name="EditProjeto">Alterar Projeto</button>
                         </div>
                     </form>
+
+                    <button type="submit" class="btn small-btn cancel-btn" id="cancelBtn">Cancelar</button>
                 </div>
-            </section class="content">
+            </section>
 
         </main>
     </div>
 
     <!-- Modal de confirmação -->
-    <div id="confirmModal" class="modal">
+    <div id="confirmModal" class="modal-confirm modal">
         <div class="modal-content">
             <span class="modal-close close-icon material-symbols-outlined"> close </span>
 

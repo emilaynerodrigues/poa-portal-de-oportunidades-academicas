@@ -1,3 +1,7 @@
+<?php
+session_start()
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +23,32 @@
 </head>
 
 <body>
+
+    <!-- criando mensagem de projeto publicado-->
+    <?php
+    // verificando se a função existe com a função isset
+    if (isset($_SESSION['projeto-adicionado'])) : //abrindo if
+    ?>
+        <!-- Modal de confirmação - Projeto publicado! -->
+        <div class="modal modal-session">
+            <div class="modal-content">
+                <a href="home.php"><span class="modal-close close-icon material-symbols-outlined"> close </span></a>
+                <span class="icon material-symbols-outlined"> check_circle </span>
+                <h3>Projeto publicado!</h3>
+                <p>Seu projeto foi publicado com sucesso! Agora os alunos têm a oportunidade de se candidatar. Esteja atento às candidaturas!</p>
+                <div class="btn-wrapper">
+                    <a href="home.php" class="btn small-btn modal-close">Entendi</a>
+                </div>
+            </div>
+        </div>
+
+    <?php
+    endif; //fechando if
+    // destruindo sessão após mostrar a mensagem
+    unset($_SESSION['projeto-adicionado']);
+
+    ?>
+    <!-- fechando mensagem de projeto publicado-->
     <!-- menu lateral -->
     <aside class="sidebar">
         <!-- Ícone de hambúrguer -->
@@ -48,7 +78,7 @@
                     </div>
 
                     <!-- formulario -->
-                    <form action="">
+                    <form action="../../php/anunciante/script_adicionarProjeto.php" method="post">
                         <!-- primeira linha -->
                         <div class="row">
                             <!-- titulo do projeto -->
@@ -95,12 +125,12 @@
                             </div>
                             <!-- data-inicio -->
                             <div class="form-item">
-                                <input type="date" name="data-inicio" id="dataInicio-input" />
+                                <input type="date" name="dataInicio" id="dataInicio-input" />
                                 <label for="dataInicio-input">Data de início</label>
                             </div>
                             <!-- data-final -->
                             <div class="form-item">
-                                <input type="date" name="data-final" id="dataFinal-input" />
+                                <input type="date" name="dataFinal" id="dataFinal-input" />
                                 <label for="dataFinal-input">Data de finalização</label>
                             </div>
                             <!-- cidade -->
@@ -110,7 +140,7 @@
                             </div>
                             <!-- uf -->
                             <div class="form-item select">
-                                <select name="uf" id="uf-select" required>
+                                <select name="uf" id="uf-select">
                                     <option value="" disabled selected hidden>Selecione</option>
                                     <option value="AC">AC</option>
                                     <option value="AL">AL</option>
@@ -159,13 +189,13 @@
                         </div>
                     </form>
                 </div>
-            </section class="content">
+            </section>
 
         </main>
     </div>
 
-    <!-- Modal de confirmação -->
-    <div id="confirmModal" class="modal">
+    <!-- Modal de confirmação - Perda de dados -->
+    <div id="confirmModal" class="modal modal-confirm">
         <div class="modal-content">
             <span class="modal-close close-icon material-symbols-outlined"> close </span>
 

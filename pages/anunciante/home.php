@@ -1,3 +1,20 @@
+<?php
+// Incluir o arquivo de conexão com o banco de dados
+include("../../php/conexao.php");
+$conn = conectar();
+
+// Lógica de paginação
+$limite_result = 6; // Definir a quantidade de projetos por página
+$pagina_atual = isset($_GET['page']) ? $_GET['page'] : 1; // Obter a página atual da URL
+
+$inicio = ($pagina_atual - 1) * $limite_result; // Calcular o início da seleção de registros
+
+// Consulta para obter os projetos de acordo com a paginação --> ordenando pela data de postagem
+$stmt = $conn->prepare("SELECT * FROM projeto ORDER BY dataPostagem DESC LIMIT $inicio, $limite_result");
+$stmt->execute();
+$projetos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,8 +31,7 @@
   <link rel="shortcut icon" href="../../img/favicon.png" type="image/x-icon" />
 
   <!-- link font symbols -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
@@ -71,13 +87,40 @@
 
         <!-- area dos projetos -->
         <div class="projetos-wrapper">
-          <?php include '../../components/projeto.php'; ?>
+          <!-- vazendo varredura de cada projeto no banco -->
+          <?php foreach ($projetos as $projeto) : ?>
+            <!-- fazendo chamada do elemento projeto-anunciante.php -->
+            <?php include("../../components/projeto-anunciante.php"); ?>
+          <?php endforeach; ?>
+        </div>
+
+        <!-- paginação -->
+        <div class="pagination">
+          <?php
+          // Consulta para contar o total de projetos
+          $total_projetos = $conn->query("SELECT COUNT(*) AS total FROM projeto")->fetch(PDO::FETCH_ASSOC);
+          $total_paginas = ceil($total_projetos['total'] / $limite_result);
+
+          // Botão Voltar
+          if ($pagina_atual > 1) {
+            echo "<a href='home.php?page=" . ($pagina_atual - 1) . "' class='pagination-btn'>Voltar
+              <span class='icon material-symbols-outlined'>chevron_left</span></a>";
+          }
+
+          echo "<p>-</p>";
+          
+          // Botão Avançar
+          if ($pagina_atual < $total_paginas) {
+            echo "<a href='home.php?page=" . ($pagina_atual + 1) . "' class='pagination-btn'>
+              <span class='icon material-symbols-outlined'> navigate_next </span>Próxima</a>";
+          }
+          ?>
         </div>
 
         <a href="adicionar-projeto.php" class="add-btn">
           <span class="material-symbols-outlined"> add </span>
         </a>
-      </section class="content">
+      </section>
 
       <!-- seção dados-pessoais -->
       <section class="content" id="dados-anuciante">dados do anuciante</section class="content">

@@ -4,8 +4,7 @@ function conectar()
 {
     //tratamento de excessos com tryCatch - tenta fazer a coneção e se não conseguir mostra a mensagem do erro (dentro do catch)
     try {
-        //conectando o bando de dados com PDO
-        $conn = new PDO("mysql:host=localhost; dbname=projeto", "root", "");
+        $conn = new PDO("mysql:host=localhost; dbname=poa", "root", "");
         // echo "conectado com sucesso!";
     } catch (PDOException $exception) {
         echo "Mensagem de error: " . $exception->getMessage(); //mensagem do erro

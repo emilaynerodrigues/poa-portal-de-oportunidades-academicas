@@ -39,7 +39,7 @@ cancelBtn.addEventListener("click", function () {
 
 // ------------------------------------------------------------------------------------------------------------
 // fazendo a contagem de caracteres do textarea das paginas de crud de projeto
-const textarea = document.getElementById("texto");
+const textarea = document.getElementById("descricao-input");
 const contador = document.getElementById("contador");
 
 textarea.addEventListener("input", function () {

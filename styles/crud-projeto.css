@@ -137,3 +137,13 @@ form .row {
 .btn-wrapper {
   justify-content: end;
 }
+
+.form-container {
+  position: relative;
+}
+
+#cancelBtn {
+  position: absolute;
+  bottom: 30px;
+  right: calc(30px + 150px + 20px);
+}

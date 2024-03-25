@@ -107,8 +107,15 @@ button {
 /*modal*/
 
 /* Estilos para o modal */
-.modal {
+.modal-confirm {
   display: none;
+}
+
+.modal-session {
+  display: flex;
+}
+
+.modal {
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -186,20 +193,24 @@ button {
 
 /* modal de confirmação */
 
-#confirmModal .modal-content {
+#confirmModal .modal-content,
+.modal-session .modal-content {
   max-width: 500px;
   text-align: center;
 }
 
-#confirmModal h3 {
+#confirmModal h3,
+.modal-session h3 {
   font-size: 20px;
 }
 
-#confirmModal p {
+#confirmModal p,
+.modal-session p {
   font-size: 14px;
 }
 
-#confirmModal .icon {
+#confirmModal .icon,
+.modal-session .icon {
   font-size: 40px;
   color: var(--federal-blue);
   font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 24;
