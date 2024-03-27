@@ -4,7 +4,14 @@
         <div class="user-icon"></div>
         <div class="projeto-info">
             <h3 class="titulo-projeto"><?php echo $projeto['titulo']; ?></h3>
-            <p class="info-adicional">postado em <span class="anunciante"><?php echo $projeto['dataPostagem']; ?></span></p>
+            <p class="info-adicional">postado em <span class="anunciante">
+                <?php
+                    // formatando a data de postagem
+                    $timestamp = strtotime($projeto['dataPostagem']);
+                    $dataFormatada = date('d/m/Y', $timestamp);
+                    echo $dataFormatada; 
+                 ?>
+            </span></p>
         </div>
     </div>
     <div class="tags-projeto">
@@ -53,8 +60,22 @@
 
         <div class="btn-wrapper">
             <a class="btn normal-btn outline-btn">Candidatos inscritos</a>
-            <a href="#" id="excluirProjeto" class="btn small-btn delete-btn">Excluir projeto</a>
+            <a href="#" onclick="abrirModalExcluir(this)" class="btn small-btn delete-btn" data-id="<?php echo $projeto['id']; ?>">Excluir projeto</a>
             <a href="#" id="alterarProjeto" class="btn small-btn">Alterar dados</a>
+        </div>
+    </div>
+</div>
+
+<!-- modal de confirmação de exclusão de projeto -->
+<div id="modalExcluir" class='modal modal-delete'>
+    <div class='modal-content'>
+        <a href='../../pages/anunciante/home.php'><span class='modal-close close-icon material-symbols-outlined'> close </span></a>
+        <span class='icon material-symbols-outlined'> help </span>
+        <h3>Seus dados serão perdidos!</h3>
+        <p>Tem certeza que deseja excluir o projeto? Todos os dados serão perdidos!</p>
+        <div class='btn-wrapper'>
+            <a href='../../pages/anunciante/home.php' class='btn small-btn cancel-btn modal-close'>Cancelar</a>
+            <a href='' id="confirmDeleteButton" data-id="<?php echo $projeto['id'] ?>" class='btn small-btn'>Excluir</a>
         </div>
     </div>
 </div>
@@ -85,11 +106,9 @@
         valorProjeto.textContent = "R$ " + valor;
         descricaoProjeto.textContent = descricao + currentProjectId;
 
-        // adicionando o ID do projeto como um parâmetro na URL dos links "Excluir projeto" e "Alterar dados"
-        var linkExcluir = document.getElementById("excluirProjeto");
+        // adicionando o ID do projeto como um parâmetro na URL dos link "Alterar dados"
         var linkAlterar = document.getElementById("alterarProjeto");
-        linkExcluir.href = "../../php/anunciante/script_excluirProjeto.php?id=" + currentProjectId;
-        linkAlterar.href = "../../pages/anunciante/alterar-projeto.php?id=" + currentProjectId;
+        linkAlterar.href = "../../../pages/anunciante/alterar-projeto.php?id=" + currentProjectId;
 
         // abrindo o modal
         modal.style.display = "flex";
@@ -99,5 +118,23 @@
     function fecharModal() {
         var modal = document.getElementById("projectModal");
         modal.style.display = "none";
+    }
+
+    // função para abrir o modal de confirmação de exclusão
+    function abrirModalExcluir(link) {
+        var modal = document.getElementById("modalExcluir");
+        var modalProjeto = document.getElementById("projectModal");
+
+        // fechando modal dos projetos
+        modalProjeto.style.display = "none";
+
+        var confirmDeleteButton = document.getElementById("confirmDeleteButton");
+        currentProjectId = link.getAttribute("data-id"); // Obtendo o ID do projeto a partir do link
+
+        // Configurando o link de exclusão com o ID correto do projeto
+        confirmDeleteButton.href = "../../php/anunciante/script_excluirProjeto.php?id=" + currentProjectId;
+
+        // Abrindo o modal de confirmação de exclusão
+        modal.style.display = "flex";
     }
 </script>

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Incluir o arquivo de conexão com o banco de dados
 include("../../php/conexao.php");
 $conn = conectar();
@@ -35,6 +37,17 @@ $projetos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
+  <!-- mostrando mensagem de projeto excluido-->
+  <?php
+  //verificando se existe a sessão
+  if (isset($_SESSION['projeto-excluido'])) {
+    echo $_SESSION['projeto-excluido'];
+  }
+
+  //destruindo sessão
+  unset($_SESSION['projeto-excluido']);
+  ?>
+
   <!-- menu lateral -->
   <aside class="sidebar">
     <!-- Ícone de hambúrguer -->
@@ -90,7 +103,7 @@ $projetos = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <!-- vazendo varredura de cada projeto no banco -->
           <?php foreach ($projetos as $projeto) : ?>
             <!-- fazendo chamada do elemento projeto-anunciante.php -->
-            <?php include("../../components/projeto-anunciante.php"); ?>
+            <?php include("../../components/anunciante-projeto.php"); ?>
           <?php endforeach; ?>
         </div>
 
@@ -108,7 +121,7 @@ $projetos = $stmt->fetchAll(PDO::FETCH_ASSOC);
           }
 
           echo "<p>-</p>";
-          
+
           // Botão Avançar
           if ($pagina_atual < $total_paginas) {
             echo "<a href='home.php?page=" . ($pagina_atual + 1) . "' class='pagination-btn'>
@@ -123,14 +136,66 @@ $projetos = $stmt->fetchAll(PDO::FETCH_ASSOC);
       </section>
 
       <!-- seção dados-pessoais -->
-      <section class="content" id="dados-anuciante">dados do anuciante</section class="content">
+      <section class="content" id="dados-anuciante"> </section>
 
       <!-- seção configuracoes -->
-      <section class="content" id="configuracoes">configurações</section class="content">
+      <section class="content" id="configuracoes">
+        <h4>Configuração</h4>
+
+        <!-- div principal -->
+        <div class="content-section">
+          <!-- menu de opções -->
+          <div class="section-options">
+            <a href="#" class="section-link active" data-target="dadosAcesso-section">Dados de Acesso</a>
+            <a href="#" class="section-link" data-target="excluirConta-section">Excluir Conta</a>
+          </div>
+
+          <!-- div - dados de acesso -->
+          <div id="dadosAcesso-section" class="dados-acesso-section content-sections" style="display: flex;">
+            <!-- formulario de dados de acesso -->
+            <!-- fazendo chamada do elemento -->
+            <?php include("../../components/anunciante-dadosAcesso.php"); ?>
+          </div>
+
+          <!-- div - excluir conta -->
+          <div id="excluirConta-section" class="content-sections">
+            <!-- primeira coluna -->
+            <div class="col">
+              <!-- pergunta -->
+              <h3>Você tem certeza que deseja excluir sua conta no POA?</h3>
+              <!-- confirmação com checkbox' -->
+              <label>
+                <input type="checkbox" id="confirmCheckbox"> Sim, tenho certeza que quero excluir minha conta
+              </label>
+              <!-- link para excluir conta -->
+              <a href="#" class="excluirConta btn">Excluir Conta</a>
+            </div>
+
+            <!-- segunda coluna -->
+            <div class="col col-explicacao">
+              <h2>Excluir conta</h2>
+              <p>Ao excluir sua conta, todas as informações associadas a ela serão permanentemente removidas do nosso sistema. Isso inclui o seguinte:</p>
+              <ul>
+                <li>Todos os seus dados pessoais, como nome, endereço de e-mail e qualquer informação de perfil.</li>
+                <li>Qualquer conteúdo que você tenha criado, como projetos, uploads de arquivos ou outras contribuições como anunciante.</li>
+                <li>Seus registros de atividades, como histórico de login e interações recentes.</li>
+              </ul>
+              <p>
+                Por favor, esteja ciente de que esta ação é irreversível. Uma vez que a conta for excluída, não será possível recuperar os dados ou restaurar o acesso à sua conta. Certifique-se de fazer o backup de qualquer informação importante antes de prosseguir com a exclusão da conta.
+                <br><br>
+                Além disso, os dois perfis, tanto de aluno quanto de anunciante, serão excluídos do sistema do Portal de Oportunidades Acadêmicas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 
-  <script src="../../js/main.js"></script>
+  <script src="../../js/linksAcesso.js"></script>
+  <script src="../../js/aside.js"></script>
+  <script src="../../js/modalConfirm.js"></script>
+
 </body>
 
 </html>

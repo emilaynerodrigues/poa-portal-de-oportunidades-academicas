@@ -35,6 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['EditProjeto'])) {
     // recebendo os dados do formulário
     $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
+    // definindo a data de postagem como a data e hora atuais
+    $dados['dataPostagem'] = date('Y-m-d H:i:s');
+
     // implementando a atualização do projeto
     $query_update = "UPDATE projeto SET titulo=:titulo, categoria=:categoria, formato=:formato, valor=:valor, dataInicio=:dataInicio, dataFinal=:dataFinal, cidade=:cidade, uf=:uf, descricao=:descricao, dataPostagem=:dataPostagem WHERE id=:id";
 
@@ -97,7 +100,7 @@ unset($_SESSION['projeto-atualizado']);
 
 <body>
 
-    <!-- mosrando mensagem de projeto publicado-->
+    <!-- mostrando mensagem de projeto publicado-->
     <?php if ($show_modal) : ?>
         <!-- Modal de confirmação - Projeto atualizado! -->
         <div class="modal modal-session">
@@ -158,7 +161,7 @@ unset($_SESSION['projeto-atualizado']);
                                     <option value="" disabled selected hidden>Selecione uma categoria</option>
 
                                     <?php
-                                    $categorias = array("Arte e Design", "Beleza e Estética", "Gestão e Finanças", "Manutenção de Computadores", "Marketing e Vendas", "Suporte e Administrativo", "TI e Programação", "Tradução e Contéudos");
+                                    $categorias = array("Arte e Design", "Beleza e Estética", "Gestão e Finanças", "Manutenção de Computadores", "Marketing e Vendas", "Projetos Sociais", "Suporte e Administrativo", "TI e Programação", "Tradução e Contéudos");
                                     foreach ($categorias as $categoria) {
                                         echo "<option value='$categoria'";
                                         if (isset($dados['categoria']) && $dados['categoria'] == $categoria) {
@@ -178,31 +181,32 @@ unset($_SESSION['projeto-atualizado']);
                             <div class="form-item select">
                                 <select name="formato" id="formato-select" required>
                                     <option value="" disabled selected hidden>Selecione um formato de trabalho</option>
-
                                     <?php
                                     $formatos = array("Remoto", "Presencial");
                                     foreach ($formatos as $formato) {
                                         echo "<option value='$formato'";
                                         if (isset($dados['formato']) && $dados['formato'] == $formato) {
-                                            echo " selected";
-                                        } elseif (isset($row_projeto['formato']) && $row_projeto['formato'] == $formato) {
-                                            echo " selected";
+                                            echo " selected"; // marca como selecionado se o formato corresponder aos dados recebidos
+                                        } elseif (isset($row_projeto) && $row_projeto['formato'] == $formato) {
+                                            echo " selected"; // marca como selecionado se o formato corresponder aos dados do banco de dados
                                         }
                                         echo ">$formato</option>";
                                     }
                                     ?>
                                 </select>
 
+
                                 <label for="formato-select">Formato de Trabalho*</label>
                             </div>
+
                         </div>
 
                         <!-- segunda linha -->
                         <div class="row">
                             <!-- valor do projeto -->
                             <div class="form-item">
-                                <input type="text" name="valor" id="valor-input" required value="<?php echo isset($dados['valor']) ? $dados['valor'] : $row_projeto['valor']; ?>" />
-                                <label for="valor-input">Valor*</label>
+                                <input type="text" name="valor" id="valor-input" value="<?php echo isset($dados['valor']) ? $dados['valor'] : $row_projeto['valor']; ?>" />
+                                <label for="valor-input">Valor</label>
                             </div>
 
                             <!-- data-inicio -->
@@ -225,7 +229,7 @@ unset($_SESSION['projeto-atualizado']);
 
                             <!-- uf -->
                             <div class="form-item select">
-                                <select name="uf" id="uf-select" required>
+                                <select name="uf" id="uf-select">
                                     <option value="" disabled selected hidden>Selecione</option>
                                     <?php
                                     $ufs = array("AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO");

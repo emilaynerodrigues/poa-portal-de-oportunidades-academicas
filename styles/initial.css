@@ -141,8 +141,8 @@
   color: var(--federal-blue);
 }
 
-form input,
-form select {
+#login form input,
+#login form select {
   height: 45px;
   width: 100%;
   padding: 0px 20px;

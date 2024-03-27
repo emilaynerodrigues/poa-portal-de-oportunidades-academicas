@@ -96,12 +96,13 @@ session_start()
                                     <option value="Gestão e Finanças">Gestão e Finanças</option>
                                     <option value="Suporte e Manutenção">Manutenção de Computadores</option>
                                     <option value="Marketing e Vendas">Marketing e Vendas</option>
+                                    <option value="Projetos Sociais">Projetos Sociais</option>
                                     <option value="Suporte e Administrativo">Suporte e Administrativo</option>
                                     <option value="TI e Programação">TI e Programação</option>
                                     <option value="Tradução e Contéudos">Tradução e Contéudos</option>
                                 </select>
 
-                                <label for="categoria-input">Categoria*</label>
+                                <label for="categoria-select">Categoria*</label>
                             </div>
 
                             <!-- formato de trabalho -->
@@ -112,7 +113,7 @@ session_start()
                                     <option value="presencial">Presencial</option>
                                 </select>
 
-                                <label for="formato-input">Formato de Trabalho*</label>
+                                <label for="formato-select">Formato de Trabalho*</label>
                             </div>
                         </div>
 
@@ -120,7 +121,7 @@ session_start()
                         <div class="row">
                             <!-- valor do projeto -->
                             <div class="form-item">
-                                <input type="text" name="valor" id="valor-input" required />
+                                <input type="text" name="valor" id="valor-input" />
                                 <label for="valor-input">Valor*</label>
                             </div>
                             <!-- data-inicio -->
@@ -171,14 +172,14 @@ session_start()
                                     <option value="TO">TO</option>
                                 </select>
 
-                                <label for="uf-input">UF</label>
+                                <label for="uf-select">UF</label>
                             </div>
 
                         </div>
 
                         <!-- descricao do projeto -->
                         <div id="descricao" class="form-item">
-                            <textarea id="texto" name="descricao" rows="6" cols="50" maxlength="1000" required></textarea>
+                            <textarea id="descricao-input" name="descricao" rows="6" cols="50" maxlength="1000" required></textarea>
                             <label for="descricao-input">Descrição*</label>
                             <span id="contador">* 1000 caracteres restantes</span>
                         </div>
